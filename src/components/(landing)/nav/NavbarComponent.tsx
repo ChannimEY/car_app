@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { getAuthToken } from "@/lib/auth";
 import { ProfileComponent } from "@/components/ProfileComponent/ProfileComponent";
 
-const NavbarComponent = ({  
+const NavbarComponent = ({
   logo = {
     url: "https://www.shadcnblocks.com",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -23,16 +23,16 @@ const NavbarComponent = ({
     title: "Shadcnblocks.com",
   },
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "/" },
     {
       title: "Products",
       url: "/product"
-   
+
     },
     {
-      title: "Resources",  
+      title: "Resources",
       url: "#"
-    
+
     },
     {
       title: "Pricing",
@@ -61,7 +61,7 @@ const NavbarComponent = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if(pathName === '/login' || 
+  if(pathName === '/login' ||
     pathName === '/signup' ||
     pathName === '/dashboard/table'
   ) {
@@ -71,10 +71,10 @@ const NavbarComponent = ({
   console.log('token', token)
 
   return (
-    <section 
+    <section
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-gray/80 backdrop-blur-lg border-b border-gray-200/50 shadow-lg' 
+        isScrolled
+          ? 'bg-gray/80 backdrop-blur-lg border-b border-gray-200/50 shadow-lg'
           : 'bg-transparent'
       }`}
     >
@@ -85,10 +85,10 @@ const NavbarComponent = ({
             {/* Logo */}
             <Link href={logo.url} className="flex items-center gap-3 group">
               <div className="relative">
-                <Image 
-                  src={logo.src} 
-                  className="h-8 w-8 transition-transform duration-300 group-hover:scale-110" 
-                  alt={logo.alt} 
+                <Image
+                  src={logo.src}
+                  className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
+                  alt={logo.alt}
                   width={32}
                   height={32}
                 />
@@ -111,43 +111,43 @@ const NavbarComponent = ({
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-3">
-            <Button 
-              asChild 
-              variant="ghost" 
+            <Button
+              asChild
+              variant="ghost"
               size="sm"
               className="font-medium hover:bg-gray-100 text-white hover:text-gray-900 transition-all duration-200"
             >
               {
                 token? (
                   <Link href={"/dashboard"}>Dashboard</Link>
-              
+
                 ):
                 (
                   //  <Link href={auth.login.url}>{auth.login.title}</Link>
-                  
+
                   <ProfileComponent />
                  )
               }
             </Button>
-            <Button 
-              asChild 
+            <Button
+              asChild
               size="sm"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               <Link href={auth.signup.url}>{auth.signup.title}</Link>
             </Button>
           </div>
-        </nav> 
+        </nav>
 
         {/* Mobile Menu */}
         <div className="lg:hidden">
           <div className="flex items-center justify-between h-16">
             {/* Mobile Logo */}
             <Link href={logo.url} className="flex items-center gap-2">
-              <Image 
-                src={logo.src} 
-                className="h-8 w-8" 
-                alt={logo.alt} 
+              <Image
+                src={logo.src}
+                className="h-8 w-8"
+                alt={logo.alt}
                 width={32}
                 height={32}
               />

@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
@@ -11,23 +13,23 @@ import {
 } from "@/components/ui/card";
 import { CarData } from "@/lib/car-type";
 
-interface Blog7Props {
+interface DisplayProductProps {
   tagline: string;
   heading: string;
   description: string;
   buttonText: string;
   buttonUrl: string;
-  posts: CarData[]
+  posts: CarData[];
 }
 
 export default function DisplayProductComponent({
-  tagline = "Latest Updates",
-  heading = "Blog Posts",
-  description = "Discover the latest trends, tips, and best practices in modern web development. From UI components to design systems, stay updated with our expert insights.",
-  buttonText = "View all articles",
+  tagline = "Featured Cars",
+  heading = "Explore Our Collection",
+  description = "Browse premium vehicles with the best specs, performance, and prices. Each car is listed with accurate details and stunning images.",
+  buttonText = "View all cars",
   buttonUrl = "",
-  posts
-}: Blog7Props){
+  posts,
+}: DisplayProductProps) {
   return (
     <section className="py-32">
       <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
@@ -48,53 +50,52 @@ export default function DisplayProductComponent({
             </a>
           </Button>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-             {posts.map((post) => (
 
-            <Card
-              key={post.id}
-              className="grid grid-rows-[auto_auto_1fr_auto] pt-0"
-            >
-              <div className="aspect-16/9 w-full">
-                <a
-                  href={post.make}
-                  target="_blank"
-                  className="transition-opacity duration-200 fade-in hover:opacity-70"
-                >
-                  <Image
-                    src={post.image}
-                    width={500}
-                    height={500}
-                    alt={post.make}
-                    className="h-full w-full object-container object-center"
-                  />
-                </a>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 w-full">
+          {posts.map((post) => (
+            <Card key={post.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="aspect-[16/9] w-full">
+                <Image
+                  src={post.image}
+                  width={500}
+                  height={300}
+                  alt={post.make}
+                  className="h-full w-full object-cover"
+                />
               </div>
               <CardHeader>
-                <h3 className="text-lg font-semibold hover:underline md:text-xl">
+                <h3 className="text-xl font-semibold hover:underline">
                   <a href={post.make} target="_blank">
-                    {post.make}
+                    {post.make} {post.model}
                   </a>
                 </h3>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{post.description}</p>
+                <p className="text-muted-foreground mb-4">{post.description}</p>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-medium text-primary">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(post.price)}
+                  </span>
+                  <span className="text-muted-foreground">Year: {post.year}</span>
+                </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex justify-between items-center">
                 <a
-                  href={post.make}
-                  target="_blank"
-                  className="flex items-center text-foreground hover:underline"
+                  href="#"
+
+                  className="text-sm text-blue-600 hover:underline flex items-center"
                 >
-                  Read more
-                  <ArrowRight className="ml-2 size-4" />
+                  Details
+                  <ArrowRight className="ml-1 h-4 w-4" />
                 </a>
               </CardFooter>
             </Card>
-
           ))}
         </div>
       </div>
     </section>
   );
-};
+}
