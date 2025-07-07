@@ -50,7 +50,7 @@ export default function DisplayProductComponent({
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
              {posts.map((post) => (
-              
+
             <Card
               key={post.id}
               className="grid grid-rows-[auto_auto_1fr_auto] pt-0"
@@ -91,11 +91,10 @@ export default function DisplayProductComponent({
                 </a>
               </CardFooter>
             </Card>
-           
+
           ))}
         </div>
       </div>
     </section>
   );
 };
-
